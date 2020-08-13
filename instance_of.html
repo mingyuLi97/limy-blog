@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function instance_of(instance, classFunc){
+        //     let classFuncPrototype = classFunc.prototype
+        //         // Object.getPrototypeOf(obj) === obj.__proto__
+        //         // IE 下不兼容 __proto__
+        //         proto = Object.getPrototypeOf(instance)
+        //     while(true){
+        //         if(proto === null){
+        //             return false
+        //         }
+        //         if(proto === classFuncPrototype){
+        //             return true
+        //         }
+        //         proto = Object.getPrototypeOf(proto)
+        //     }
+        // }
+        // let arr = []
+        // console.log(instance_of(arr, Array));
+        // console.log(instance_of(arr, Object));
+        // console.log(instance_of(arr, RegExp));
+
+        const class2type = {},
+            toString = class2type.toString, // Object.prototype.toString
+            typeList = "Boolean Number String Function Array Date RegExp Object Error".split(" "); // 设定数据类型的映射表
+        
+        typeList.forEach(name => {
+            class2type[`[object ${name}]`] = name.toLowerCase()
+        })
+
+        function toType(obj){
+            if(obj == null){    // 如果传入的是 null 或者 undefined，返回对应的字符串
+                return obj + ""
+            }
+            return typeof obj === "object" || typeof obj === "function" ?
+                class2type[toString.call(obj)] || 'object':
+                typeof obj
+        }
+
+        console.log(toType(1), toType(null), toType({}), toType(/^1/), toType([]));    
+        console.log(toString, typeList);
+        console.log(class2type);
+    </script>
+</body>
+
+</html>

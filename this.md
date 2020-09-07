@@ -5,3 +5,4 @@
 3. 构造函数的 this 是当前类的实例
 4. 箭头函数没有自己的 this， 其 this 指向创建时的上下文
 5. 基于 call / apply / bind 暴力改变 this
+
